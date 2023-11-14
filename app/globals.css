@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top{
+  z-index: 0 !important;
+}
+/* Border radius style inputs buttons modals karts */
+.custom-border-radius {
+  border-radius: 0px 90px 0 90px;
+}
+
+.custom-card-border-radius{
+  border-radius: 0px 50px 0 50px;
+}
+
+.custom-listing-border-radius{
+  border-radius: 0px 60px 0 60px;
+}
+
+.custom-buttom-radius {
+  border-radius: 0px 20px 0 20px;
+}
+
+.custom-input-radius {
+  border-radius: 0px 20px 0 20px;
+}
+
+.custom-small-radius {
+  border-radius: 0px 10px 0 10px;
+}
+
+.hero-span {
+  font-size: 4vw;
+}
+
+/* Font no2 */
+.rajdhani-font {
+  font-family: Rajdhani, sans-serif;
+}
+
+/* Calendar style */
+.rdrMonth{
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper{
+  width: 100% !important;
+  font-size: 16px !important;
+}
+
+/* need to make this image darker with opacity */
+.footer-bg {
+  background: url("/images/footer-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: static;
+  bottom: 0;
+  width: 100vw;
+  height: auto;
+}
+
+/* Styles for smaller screens (e.g., mobile devices) */
+@media (max-width: 640px) {
+  .hero-text {
+    font-size: 9vw;
+  }
+
+  .hero-span {
+    font-size: 4vw;
+  }
+
+  h2 {
+    font-size: 2.5vw;
+  }
+
+  .icon {
+    font-size: 4.5vw;
+  }
+}
+
+/* Styles for larger screens (e.g., desktop) */
+@media (min-width: 641px) {
+
+  .hero-text {
+    font-size: 9vw;
+  }
+
+  .hero-span {
+    font-size: 4vw;
+  }
+
+  h2 {
+    font-size: 1.5vw;
+  }
+
+  .icon {
+    font-size: 3.5vw;
+  }
+}
+
+
