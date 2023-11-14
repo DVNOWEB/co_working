@@ -1,4 +1,4 @@
-import getListings from './actions/getListings'
+import getListings, {IListingsParams} from './actions/getListings'
 import getCurrentUser from './actions/getCurrentUser'
 
 import ClientOnly from './components/ClientOnly'
@@ -10,12 +10,12 @@ import InfoBannerTwo from './components/InfoBannerTwo'
 import Footer from './components/Footer'
 import ArraySlicer from './components/ArraySlicer'
 
-interface Listing {
-  id: string
-}
+interface HomeProps {
+  searchParams: IListingsParams
+};
 
-export default async function Home() {
-  const listings: Listing[] = await getListings()
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
@@ -56,3 +56,4 @@ export default async function Home() {
     </ClientOnly>
   )
 }
+export default Home

@@ -12,7 +12,6 @@ import { differenceInCalendarDays, eachDayOfInterval } from 'date-fns'
 import { facilities } from '@/app/components/Facilities'
 import ListingPage from '@/app/components/listings/ListingPage'
 import Container from '@/app/components/Container'
-// import ListingInfo from '@/app/components/listings/ListingInfo'
 
 import useLoginModal from '@/app/hooks/useLoginModal'
 import Footer from '@/app/components/Footer'
@@ -42,7 +41,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const desabledDates = useMemo(() => {
     let dates: Date[] = []
 
-    reservations.forEach((reservation) => {
+    reservations.forEach((reservation: any) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate),
