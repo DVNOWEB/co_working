@@ -197,16 +197,16 @@ const ListingPage: React.FC<ListingPageProps> = ({
             </div>
           </div>
           <div className="w-full py-3">
-            <p className="py-4 text-gray-400">
+            <p className="py-2 text-gray-400">
               ${pricePerDay.toFixed(2)} / day
             </p>
-            <p className="py-4 text-gray-400">
+            <p className="py-2 text-gray-400">
               ${pricePerWeek.toFixed(2)} / week{' '}
               <span className="text-red-600 border-red-500 border-[1px] px-1 custom-small-radius ml-2">
                 10% Off
               </span>
             </p>
-            <p className="py-4 text-gray-400">
+            <p className="py-2 text-gray-400">
               ${pricePerMonth.toFixed(2)} / month
               <span className="text-red-600 border-red-500 border-[1px] px-1 custom-small-radius ml-2">
                 20% Off

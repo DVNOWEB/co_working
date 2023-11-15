@@ -18,7 +18,7 @@ import { PiMapPinLight } from 'react-icons/pi'
 
 import ButtonWfull from '../ButtonWfull'
 import PaymentMetod from '../PaymentMetod'
-import { Listing } from '@prisma/client'
+import { useState } from 'react'
 
 interface ListingReservationModalProps {
   price: number
@@ -49,6 +49,11 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   images = [],
   facility = [],
 }) => {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
+
+  const handlePaymentMethodSelect = (method: string) => {
+    setSelectedPaymentMethod(method)
+  }
 
   const facilityIcons = {
     Wifi: <AiOutlineWifi size={16} />,
@@ -68,7 +73,6 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
       <div className="flex flex-col md:flex-row w-full">
         {/* Date and Calendar */}
         <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
-          {/* Date text and Calendar here */}
           <div className="flex flex-col justify-between gap-4 pr-2">
             <div>
               <hr className="mt-14 md:hidden" />
@@ -87,14 +91,15 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
             </div>
           </div>
           <div className="hidden md:block">
-            <PaymentMetod />
+            <PaymentMetod
+              onSelectPaymentMethod={handlePaymentMethodSelect}
+              selectedMethod={selectedPaymentMethod}
+            />
           </div>
         </div>
 
         {/* Image, Title, Address, Facilities */}
-        <div
-          className="order-2 md:order-2 flex justify-between flex-col md:pl-3 md:w-[50%]">
-          {/* Image, Title, Address, Facilities here */}
+        <div className="order-2 md:order-2 flex justify-between flex-col md:pl-3 md:w-[50%]">
           <Image
             className="custom-card-border-radius"
             src={images[0]}
@@ -147,20 +152,18 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
 
           {/* Total Price */}
           <div className="order-3 md:order-4 w-full">
-            {/* Total Price here */}
-            <div className="flex flex-row justify-between pt-6">
-              <div className="text-2xl text-neutral-500 font-semibold">
+            <div className="flex flex-row justify-between pt-6 my-5">
+              <div className="text-2xl text-neutral-700 font-semibold">
                 Total Price:
               </div>
-              <div className="text-2xl text-neutral-500 font-semibold">
+              <div className="text-2xl text-neutral-700 font-semibold">
                 ${totalPrice}
               </div>
             </div>
-            <hr />
+            <hr className='pb-1 md:hidden'/>
           </div>
           {/* Button */}
           <div className="order-5 hidden md:block md:order-5 w-full">
-            {/* Button here */}
             <div className="w-full">
               <ButtonWfull
                 label="Book Now"
@@ -173,15 +176,15 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
 
         {/* Payment Method and Icons */}
         <div className="order-4 md:order-3 flex flex-col my-3 md:hidden">
-          {/* Payment Method and Icons here */}
           <div className="order-3 flex flex-col">
-            <PaymentMetod />
+            <PaymentMetod
+              onSelectPaymentMethod={handlePaymentMethodSelect}
+              selectedMethod={selectedPaymentMethod}
+            />
           </div>
         </div>
-
         {/* Button */}
         <div className="order-5 md:order-5 w-full md:hidden">
-          {/* Button here */}
           <div className="w-full">
             <ButtonWfull
               label="Book Now"
