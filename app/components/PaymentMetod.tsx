@@ -9,8 +9,8 @@ import MasterCardIcon from '@/public/images/cc-mastercard.svg'
 
 const PaymentMetod = () => {
   return (
-    <div className="px-4">
-      <div className='mb-2'>
+    <div className="md:px-4">
+      <div className="mb-2">
         <span className="text-neutral-700 text-xl font-bold inline pr-2">
           Choose Payment Method{' '}
         </span>
@@ -20,7 +20,7 @@ const PaymentMetod = () => {
         />
       </div>
 
-      <div className="flex flex-row justify-between md:pr-3">
+      <div className="flex flex-row justify-between md:pr-3 md:px-0 px-4 py-1">
         <div className="active:border-2 active:text-green-700">
           <Image
             className="hover:opacity-50 transition-all duration-300 ease-in-out"
