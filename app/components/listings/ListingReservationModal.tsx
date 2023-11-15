@@ -17,6 +17,7 @@ import { LuMonitorCheck } from 'react-icons/lu'
 import { PiMapPinLight } from 'react-icons/pi'
 
 import ButtonWfull from '../ButtonWfull'
+import PaymentMetod from '../PaymentMetod'
 
 interface ListingReservationModalProps {
   price: number
@@ -62,30 +63,32 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
 
   return (
     <>
-      <div className="flex flex-wrap md:flex-row w-full">
-        <div className="flex flex-col justify-between bg-white rounded-xl w-[50%] md:pr-3">
+      <div className="flex flex-col md:flex-row w-full overflow-hidden">
+        {/* Date and Calendar */}
+        <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
+          {/* Date text and Calendar here */}
           <div className="flex flex-col items-center gap-1 p-2">
             <div>
               <span className="text-5xl inline font-bold text-neutral-700">
                 Choose dates
               </span>
             </div>
-            <Calendar
-              value={dateRange}
-              onChange={(value) => onChangeDate(value.selection)}
-              disabledDates={disabledDates}
-            />
-          </div>
-          <div className="flex flex-col">
-            Choose Payment Method
-            <div className="flex flex-row justify-between md:pr-3">
-              <div>Pay Pall</div>
-              <div>Credit Card</div>
+            <div className="hidden md:block border-box">
+              <Calendar
+                value={dateRange}
+                onChange={(value) => onChangeDate(value.selection)}
+                disabledDates={disabledDates}
+              />
+            </div>
+            <div className="hidden md:block">
+              <PaymentMetod />
             </div>
           </div>
         </div>
-        {/* Image col right */}
-        <div className="flex flex-wrap justify-between flex-col md:pl-3 w-[50%]">
+
+        {/* Image, Title, Address, Facilities */}
+        <div className="order-2 md:order-2 flex justify-between flex-col md:pl-3 md:w-[50%]">
+          {/* Image, Title, Address, Facilities here */}
           <Image
             className="custom-card-border-radius"
             src={images[0]}
@@ -127,9 +130,128 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
               )}
             </div>
           </div>
-          {/* Footer */}
+          {/*  Hide calendar on md:devices */}
+          <div className="md:hidden">
+            <Calendar
+              value={dateRange}
+              onChange={(value) => onChangeDate(value.selection)}
+              disabledDates={disabledDates}
+            />
+          </div>
+
+          {/* Total Price */}
+          <div className="order-3 md:order-4 w-full">
+            {/* Total Price here */}
+            <div className="flex flex-row justify-between my-2">
+              <div className="text-2xl font-semibold">Total Price:</div>
+              <div className="text-2xl font-semibold">${totalPrice}</div>
+            </div>
+          </div>
+          {/* Button */}
+          <div className="order-5 hidden md:block md:order-5 w-full">
+            {/* Button here */}
+            <div className="w-full">
+              <ButtonWfull
+                label="Book Now"
+                onClick={onSubmit}
+                disabled={disabled}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Method and Icons */}
+        <div className="order-4 md:order-3 flex flex-col md:hidden">
+          {/* Payment Method and Icons here */}
+          <div className="order-3 flex flex-col">
+            <PaymentMetod />
+          </div>
+        </div>
+
+        {/* Button */}
+        <div className="order-5 md:order-5 w-full md:hidden">
+          {/* Button here */}
+          <div className="w-full">
+            <ButtonWfull
+              label="Book Now"
+              onClick={onSubmit}
+              disabled={disabled}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* </>
+
+      
+      <div className="flex flex-col md:flex-row w-full">
+        <div className="flex flex-col placeholder:justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
+          <div className="flex flex-col items-center gap-1 p-2">
+            <div>
+              <span className="text-5xl inline font-bold text-neutral-700">
+                Choose dates
+              </span>
+            </div>
+            <Calendar
+              value={dateRange}
+              onChange={(value) => onChangeDate(value.selection)}
+              disabledDates={disabledDates}
+            />
+          </div>
+          <div className="order-3 flex flex-col">
+            <PaymentMetod />
+          </div>
+        </div>
+     
+        <div className="flex justify-between order-1 md:order-2 flex-col md:pl-3 md:w-[50%]">
+          <div>
+            <div className="">
+              <Image
+                className="custom-card-border-radius"
+                src={images[0]}
+                alt="Property Image"
+                width={800}
+                height={300}
+              />
+              <div className="flex flex-col">
+                <div className="text-2xl mt-5 font-semibold">{title}</div>
+                <div className="flex flex-col mt-1">
+                  <span className="flex items-baseline gap-2 font-light text-gray-500">
+                    <PiMapPinLight size={16} />
+                    {address}
+                  </span>
+                  <span className="flex items-baseline gap-2 font-light text-gray-500">
+                    <AiOutlineMail size={15} />
+                    {email}
+                  </span>
+                </div>
+             
+                <div className="my-3 gap-1">
+                  {facility && facility.length > 0 && (
+                    <div className="flex flex-wrap mt-3 mb-3 gap-3">
+                      {facility.map((facilityName, index) => (
+                        <div
+                          key={facilityName}
+                          className="flex items-center gap-1 border uppercase rajdhani-font text-gray-500 border-gray-400 py-[1px] px-[5px] rounded-tr-lg rounded-bl-lg">
+                          <span className="bg-white">
+                            {
+                              facilityIcons[
+                                facilityName as keyof typeof facilityIcons
+                              ]
+                            }
+                          </span>
+                          <span>{facilityName}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+           
+          </div>
           <div className="flex flex-col">
-            <div className="flex flex-row justify-between my-3">
+            <div className="flex flex-row justify-between my-2">
               <div className="text-2xl font-semibold">Total Price:</div>
               <div className="text-2xl font-semibold">${totalPrice}</div>
             </div>
@@ -142,7 +264,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
