@@ -22,7 +22,6 @@ import Heading from './Heading'
 import ListingModal from '../modals/ListingModal'
 import ButtonWfull from '../ButtonWfull'
 import Reviews from './Reviews'
-import ListingMap from './ListingMap'
 import ListingInfo from './ListingInfo'
 
 interface ListingPageProps {

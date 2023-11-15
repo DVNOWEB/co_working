@@ -68,7 +68,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
           {/* Date text and Calendar here */}
           <div className="flex flex-col justify-between gap-4 pr-2">
-            <div>
+            <div className=''>
               <span className="text-5xl inline font-bold text-neutral-700">
                 Choose dates
               </span>
@@ -142,10 +142,11 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
           {/* Total Price */}
           <div className="order-3 md:order-4 w-full">
             {/* Total Price here */}
-            <div className="flex flex-row justify-between my-2">
+            <div className="flex flex-row justify-between pt-6">
               <div className="text-2xl font-semibold">Total Price:</div>
               <div className="text-2xl font-semibold">${totalPrice}</div>
             </div>
+              <hr className='text-neutral-900 '/>
           </div>
           {/* Button */}
           <div className="order-5 hidden md:block md:order-5 w-full">
@@ -161,7 +162,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         </div>
 
         {/* Payment Method and Icons */}
-        <div className="order-4 md:order-3 flex flex-col md:hidden">
+        <div className="order-4 md:order-3 flex flex-col my-3 md:hidden">
           {/* Payment Method and Icons here */}
           <div className="order-3 flex flex-col">
             <PaymentMetod />
