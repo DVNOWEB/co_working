@@ -67,22 +67,22 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         {/* Date and Calendar */}
         <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
           {/* Date text and Calendar here */}
-          <div className="flex flex-col items-center gap-1 p-2">
+          <div className="flex flex-col justify-between gap-4 pr-2">
             <div>
               <span className="text-5xl inline font-bold text-neutral-700">
                 Choose dates
               </span>
             </div>
-            <div className="hidden md:block border-box">
+            <div className="hidden md:block">
               <Calendar
                 value={dateRange}
                 onChange={(value) => onChangeDate(value.selection)}
                 disabledDates={disabledDates}
               />
             </div>
-            <div className="hidden md:block">
-              <PaymentMetod />
-            </div>
+          </div>
+          <div className="hidden md:block">
+            <PaymentMetod />
           </div>
         </div>
 
