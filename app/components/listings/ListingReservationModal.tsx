@@ -63,63 +63,77 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   return (
     <>
       <div className="flex flex-wrap md:flex-row w-full">
-        <div className="bg-white rounded-xl w-[50%] md:pr-3">
-          <div className="flex flex-row items-center gap-1 p-4">
+        <div className="flex flex-col justify-between bg-white rounded-xl w-[50%] md:pr-3">
+          <div className="flex flex-col items-center gap-1 p-2">
             <div>
-              <span className="text-5xl font-bold text-neutral-700">
+              <span className="text-5xl inline font-bold text-neutral-700">
                 Choose dates
               </span>
             </div>
+            <Calendar
+              value={dateRange}
+              onChange={(value) => onChangeDate(value.selection)}
+              disabledDates={disabledDates}
+            />
           </div>
-          <Calendar
-            value={dateRange}
-            onChange={(value) => onChangeDate(value.selection)}
-            disabledDates={disabledDates}
-          />
+          <div className="flex flex-col">
+            Choose Payment Method
+            <div className="flex flex-row justify-between md:pr-3">
+              <div>Pay Pall</div>
+              <div>Credit Card</div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col md:pl-3 w-[50%]">
+        {/* Image col right */}
+        <div className="flex flex-wrap justify-between flex-col md:pl-3 w-[50%]">
           <Image
             className="custom-card-border-radius"
             src={images[0]}
             alt="Property Image"
-            width={500}
+            width={800}
             height={300}
           />
-          <div className="text-2xl mt-5 font-semibold">{title}</div>
-          <div className="flex flex-col mt-1">
-            <span className="flex items-baseline gap-2 font-light text-gray-500">
-              <PiMapPinLight size={16} />
-              {address}
-            </span>
-            <span className="flex items-baseline gap-2 font-light text-gray-500">
-              <AiOutlineMail size={15} />
-              {email}
-            </span>
+          <div className="flex flex-col">
+            <div className="text-2xl mt-5 font-semibold">{title}</div>
+            <div className="flex flex-col mt-1">
+              <span className="flex items-baseline gap-2 font-light text-gray-500">
+                <PiMapPinLight size={16} />
+                {address}
+              </span>
+              <span className="flex items-baseline gap-2 font-light text-gray-500">
+                <AiOutlineMail size={15} />
+                {email}
+              </span>
+            </div>
+            {/* Facilities */}
+            <div className="my-3 gap-1">
+              {facility && facility.length > 0 && (
+                <div className="flex flex-wrap mt-3 mb-3 gap-3">
+                  {facility.map((facilityName, index) => (
+                    <div
+                      key={facilityName}
+                      className="flex items-center gap-1 border uppercase rajdhani-font text-gray-500 border-gray-400 py-[1px] px-[5px] rounded-tr-lg rounded-bl-lg">
+                      <span className="bg-white">
+                        {
+                          facilityIcons[
+                            facilityName as keyof typeof facilityIcons
+                          ]
+                        }
+                      </span>
+                      <span>{facilityName}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-          <div className="mt-3 mb-3 gap-1">
-            {facility && facility.length > 0 && (
-              <div className="flex flex-wrap mt-3 mb-3 gap-3">
-                {facility.map((facilityName, index) => (
-                  <div
-                    key={facilityName}
-                    className="flex items-center gap-1 border uppercase rajdhani-font text-gray-500 border-gray-400 py-[1px] px-[5px] rounded-tr-lg rounded-bl-lg">
-                    <span className="bg-white">
-                      {
-                        facilityIcons[
-                          facilityName as keyof typeof facilityIcons
-                        ]
-                      }
-                    </span>
-                    <span>{facilityName}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="flex flex-row justify-between my-5">
+          {/* Footer */}
+          <div className="flex flex-col">
+            <div className="flex flex-row justify-between my-3">
               <div className="text-2xl font-semibold">Total Price:</div>
               <div className="text-2xl font-semibold">${totalPrice}</div>
             </div>
-            <div className="w-full my-2">
+            <div className="w-full">
               <ButtonWfull
                 label="Book Now"
                 onClick={onSubmit}

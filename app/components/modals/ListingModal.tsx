@@ -102,7 +102,7 @@ const ListingModal: React.FC<ListingModalProps> = ({
               <div className="relativ p-3 m-4 mb-0">{body}</div>
 
               {/* Footer */}
-              <div className="flex flex-col gap-2 p-2 m-5 mb-10">{footer}</div>
+              <div className="flex flex-col gap-2 p-2 mb-1">{footer}</div>
             </div>
           </div>
         </div>
