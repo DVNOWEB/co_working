@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { isAfter, isBefore, parseISO, startOfToday } from 'date-fns'
 
 import Container from '../components/Container'
 import HeadingAccount from '../components/HeadingAccount'
@@ -44,6 +45,23 @@ const AccountClient: React.FC<AccountClientProps> = ({
     [router]
   )
 
+  const isReservationOld = (startDate: string) => {
+    return !isAfter(parseISO(startDate), startOfToday())
+  }
+
+  const sortedReservations = [...reservations].sort(
+    (a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime()
+  )
+
+  const newReservations = sortedReservations.filter(
+    (reservation) => !isReservationOld(reservation.startDate)
+  )
+
+  const oldReservations = sortedReservations.filter((reservation) =>
+    isReservationOld(reservation.startDate)
+  )
+
+
   return (
     <>
       <Container>
@@ -58,7 +76,7 @@ const AccountClient: React.FC<AccountClientProps> = ({
 
       <Container>
         <div>
-          {reservations.map((reservation: any) => (
+          {newReservations.map((reservation) => (
             <AccountCard
               key={reservation.id}
               data={reservation.listing}
@@ -79,15 +97,15 @@ const AccountClient: React.FC<AccountClientProps> = ({
       </div>
       <Container>
         <div>
-          {reservations.map((reservation: any) => (
+          {oldReservations.map((reservation) => (
             <AccountCard
               key={reservation.id}
               data={reservation.listing}
               reservation={reservation}
-              actionId={reservation.id}
-              onAction={onCancel}
-              disabled={deletingId === reservation.id}
-              actionLabel="Cancel Reservation"
+              isOld={true}
+              onAction={undefined} // No action for old bookings
+              disabled={true}
+              actionLabel="Expired"
               currentUser={currentUser}
             />
           ))}
