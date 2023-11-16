@@ -2,6 +2,7 @@ import ClientOnly from '../components/ClientOnly'
 import getCurrentUser from '../actions/getCurrentUser'
 import getReservations from '../actions/getReservations'
 import AccountClient from './AccountClient'
+import EmptyState from '../components/EmptyState'
 
 const AccountPage = async () => {
   const currentUser = await getCurrentUser()
@@ -9,7 +10,10 @@ const AccountPage = async () => {
   if (!currentUser) {
     return (
       <ClientOnly>
-        <div> Unauthorized! Please login or register! </div>
+        <EmptyState 
+        title="You are not logged in!" 
+        subtitle="Please login or register!"
+        />
       </ClientOnly>
     )
   }
@@ -21,7 +25,9 @@ const AccountPage = async () => {
   if (reservations.length === 0) {
     return (
       <ClientOnly>
-        <div> You have no reservations! </div>
+        <EmptyState
+        title="You have no reservations!"
+        />
       </ClientOnly>
     )
   }
