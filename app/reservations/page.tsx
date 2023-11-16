@@ -26,7 +26,7 @@ const OwnerReservationPage = async () => {
       <ClientOnly>
         <EmptyState
           title="You have no reservations!"
-          subtitle="Please create a listing!"
+          subtitle="Please create a listing for your property!"
         />
       </ClientOnly>
     )

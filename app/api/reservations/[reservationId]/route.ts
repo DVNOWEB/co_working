@@ -21,6 +21,7 @@ export async function DELETE(
     throw new Error('Invalid Credentials')
   }
 
+  // Delete reservation if user is the owner of the reservation or the listing owner of the reservation
   const reservation = await prisma.reservation.deleteMany({
     where: {
       id: reservationId,

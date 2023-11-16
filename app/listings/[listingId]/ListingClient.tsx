@@ -83,7 +83,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       })
   }, [currentUser, dateRange, listing?.id, loginModal, router, totalPrice])
 
-  // We will change the total price when the date range changes
+  // We will change the total price when the date range changes add the discount too
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInCalendarDays(

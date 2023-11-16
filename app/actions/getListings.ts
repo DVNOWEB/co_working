@@ -24,6 +24,7 @@ export default async function getListings(params: IListingsParams) {
       facility,
     } = params
 
+    // Let because we will be use same variable name for different queries
     let query: any = {}
 
     if (userId) {

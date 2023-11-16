@@ -76,7 +76,7 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
       </Container>
 
       <div className="flex flex-row py-3 xl:px-20 lg:px-8 md:px-10 sm:px-5 px-5 bg-neutral-700">
-        <span className="px-2 text-white text-2xl font-bold">Old Bookings</span>
+        <span className="px-2 text-white text-2xl font-bold">Old Reservations</span>
       </div>
     </>
   )
