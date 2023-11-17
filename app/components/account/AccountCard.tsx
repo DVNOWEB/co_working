@@ -109,14 +109,14 @@ const AccountCard: React.FC<AccountCardProps> = ({
       <div style={cardStyle}>
         {/* Image */}
         <div className="flex flex-row justify-between">
-          <div className="flex gap-5 col-span-1 cursor-pointer group">
+          <div className="flex gap-5 col-span-1 cursor-pointer group shrink-1">
             <div
               onClick={() => {
                 router.push(`/listings/${data.id}`)
               }}
               className="aspect-auto py-10 px-5 overflow-hidden">
               <Image
-                width={350}
+                width={250}
                 height={200}
                 alt="Listing"
                 src={data.images[0]} // Use 'data.images' instead of 'data.imageSrc'
