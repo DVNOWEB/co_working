@@ -162,7 +162,7 @@ const AccountCard: React.FC<AccountCardProps> = ({
           </div>
 
           {/* Price */}
-          <div className="flex py-6 flex-col justify-between">
+          <div className="flex md:py-5 py-3 px-1 flex-col justify-between">
             <div className="flex flex-col gap-4">
               {!isOld && (
                 <FaPencilAlt className="md:text-3xl text-xl text-zinc-800 cursor-pointer" />
