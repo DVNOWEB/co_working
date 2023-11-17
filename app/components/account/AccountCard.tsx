@@ -49,7 +49,7 @@ const AccountCard: React.FC<AccountCardProps> = ({
 }) => {
   const router = useRouter()
   const { getByValue } = useCountries()
-  
+
   const cardStyle = isOld ? { opacity: 0.5 } : {}
 
   const location = getByValue(data.locationValue)
@@ -100,48 +100,59 @@ const AccountCard: React.FC<AccountCardProps> = ({
     const start = new Date(reservation.startDate)
     const end = new Date(reservation.endDate)
 
-    return `${format(start, 'PP')} - ${format(end, 'PP')}`
+    return (
+      <div>
+        <div>
+          <span className=" text-green-700">From: </span>
+          {format(start, 'PP')}
+        </div>
+        <div>
+          <span className=" text-green-700">To: </span>
+          {format(end, 'PP')}
+        </div>
+      </div>
+    )
   }, [reservation])
 
   return (
     // Card list layout
     <>
       <div style={cardStyle}>
-        {/* Image */}
-        <div className="flex flex-row justify-between">
-          <div className="flex gap-5 col-span-1 cursor-pointer group shrink-1">
+        <div className="flex flex-row justify-between my-4">
+          <div className="flex gap-1 cursor-pointer group">
+            {/* Image */}
             <div
               onClick={() => {
                 router.push(`/listings/${data.id}`)
               }}
-              className="aspect-auto py-10 px-5 overflow-hidden">
+              className="aspect-auto md:my-5 my-2 md:px-5 overflow-hidden">
               <Image
-                width={250}
-                height={200}
+                width={200}
+                height={150}
                 alt="Listing"
                 src={data.images[0]} // Use 'data.images' instead of 'data.imageSrc'
-                className="object-cover group-hover:scale-110 transition-all duration-500 custom-card-border-radius"
+                className="object-cover group-hover:scale-110 transition-all duration-500 custom-card-border-radius md:w-[250px] md:h-[200px]]"
               />
             </div>
             {/* Info */}
-            <div className="flex py-12 px-1 aspect-auto relative">
-              <div className="flex flex-col justify-between ">
-                <div className="flex flex-col">
-                  <h3 className="pb-2 font-semibold text-2xl bg-gradient-to-b from-white">
+            <div className="flex md:py-5 py-3 px-1 aspect-auto">
+              <div className="flex flex-col justify-between">
+                <div>
+                  <h3 className="pb-2 font-semibold text-xl md:text-2xl bg-gradient-to-b from-white">
                     {data.title}
                   </h3>
-                  <div className="py-5">
-                    <hr />
-                  </div>
-                  <p className="text-zinc-500 text-base md:font-normal hidden md:block">
+                </div>
+                <div className="md:my-3">
+                  <hr />
+                  <p className="text-zinc-500 my-3 text-base md:font-normal hidden md:block">
                     This is a toplist with the best co-working
                     <br />
                     spaces in the {location?.label}, {location?.region}
                   </p>
                 </div>
-                <div className="flex py-9 absolute bottom-0 font-bold">
+                <div className="flex">
                   {reservationDate && (
-                    <span className="text-neutral-600 text-base font-bold">
+                    <span className="text-neutral-600 font-medium text-xs md:text-base md:font-bold">
                       {reservationDate}
                     </span>
                   )}
@@ -149,16 +160,17 @@ const AccountCard: React.FC<AccountCardProps> = ({
               </div>
             </div>
           </div>
+
           {/* Price */}
-          <div className="flex py-12 flex-col justify-between relative">
-            <div className="flex flex-col gap-5">
+          <div className="flex py-6 flex-col justify-between">
+            <div className="flex flex-col gap-4">
               {!isOld && (
-                <FaPencilAlt className="text-3xl text-zinc-800 cursor-pointer" />
+                <FaPencilAlt className="md:text-3xl text-xl text-zinc-800 cursor-pointer" />
               )}
               <div className="flex ">
                 {onAction && actionLabel && (
                   <FcCancel
-                    className="text-3xl text-neutral-800 cursor-pointer"
+                    className="md:text-3xl text-xl text-neutral-800 cursor-pointer"
                     disabled={disabled}
                     label={actionLabel}
                     onClick={handleCancel}
@@ -166,9 +178,9 @@ const AccountCard: React.FC<AccountCardProps> = ({
                 )}
               </div>
             </div>
-            <div className="flex flex-row absolute bottom-0 py-9 gap-1">
-              <span className="text-neutral-700 text-base font-bold">$</span>
-              <span className="text-neutral-600 text-base font-medium">
+            <div className="flex flex-row gap-1">
+              <span className="text-neutral-700 md:text-xl text-base">$</span>
+              <span className="text-neutral-600 md:text-xl text-base font-medium">
                 {price}
               </span>
             </div>

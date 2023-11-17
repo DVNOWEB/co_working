@@ -63,7 +63,7 @@ const AccountClient: React.FC<AccountClientProps> = ({
 
 
   return (
-    <>
+    <div>
       <Container>
         <div className="pt-24 pb-10">
           <HeadingAccount title="Account" subtitle={`${currentUser?.email}`} />
@@ -111,7 +111,7 @@ const AccountClient: React.FC<AccountClientProps> = ({
           ))}
         </div>
       </Container>
-    </>
+    </div>
   )
 }
 
