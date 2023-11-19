@@ -14,6 +14,7 @@ import ListingPage from '@/app/components/listings/ListingPage'
 import Container from '@/app/components/Container'
 
 import useLoginModal from '@/app/hooks/useLoginModal'
+import ConfirmModal from '@/app/components/modals/ConfirmModal'
 import Footer from '@/app/components/Footer'
 
 const initialDateRange = {
@@ -36,6 +37,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   currentUser,
 }) => {
   const loginModal = useLoginModal()
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false)
   const router = useRouter()
 
   const desabledDates = useMemo(() => {
@@ -56,6 +58,16 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [totalPrice, setTotalPrice] = useState(listing.price)
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
+  // Function to close the confirmation modal after 3 seconds
+  const closeConfirmationModal = () => {
+    setConfirmationModalOpen(false)
+    // Redirect to the account page after 3 seconds
+    setTimeout(() => {
+      toast.success('Reservation successfully created')
+      router.push('/account')
+    }, 2000)
+  }
+
   // Create a new reservation
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -71,9 +83,13 @@ const ListingClient: React.FC<ListingClientProps> = ({
         listingId: listing?.id,
       })
       .then(() => {
-        toast.success('Reservation successfully created')
-        setDateRange(initialDateRange)
-        router.push('/account')
+        setConfirmationModalOpen(true)
+
+        setTimeout(() => {
+          closeConfirmationModal()
+          setDateRange(initialDateRange)
+          router.push('/account')
+        }, 3000)
       })
       .catch(() => {
         toast.error('Something went wrong!')
@@ -135,16 +151,13 @@ const ListingClient: React.FC<ListingClientProps> = ({
               deskCount={listing.deskCount}
             />
           </div>
-          {/* <div>
-            <ListingInfo
-              user={listing.user}
-              guestCount={listing.guestCount}
-              roomCount={listing.roomCount}
-              deskCount={listing.deskCount}
-              address={listing.address}
-            />
-          </div> */}
         </div>
+        {confirmationModalOpen && (
+          <ConfirmModal
+            title="Reservation Confirmation"
+            onClose={closeConfirmationModal} // Close the modal after 3 seconds
+          />
+        )}
       </Container>
       <Footer />
     </>

@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+import useConfirmModal from '@/app/hooks/useConfirmModal'
 import { Range } from 'react-date-range'
 import Image from 'next/image'
 import Calendar from '../Calendar'
@@ -18,7 +20,6 @@ import { PiMapPinLight } from 'react-icons/pi'
 
 import ButtonWfull from '../ButtonWfull'
 import PaymentMetod from '../PaymentMetod'
-import { useState } from 'react'
 
 interface ListingReservationModalProps {
   price: number
@@ -50,6 +51,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   facility = [],
 }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
+  const openConfirmModal = useConfirmModal((state) => state.onOpen)
 
   const handlePaymentMethodSelect = (method: string) => {
     setSelectedPaymentMethod(method)
@@ -160,14 +162,17 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
                 ${totalPrice}
               </div>
             </div>
-            <hr className='pb-1 md:hidden'/>
+            <hr className="pb-1 md:hidden" />
           </div>
           {/* Button */}
           <div className="order-5 hidden md:block md:order-5 w-full">
             <div className="w-full">
               <ButtonWfull
                 label="Book Now"
-                onClick={onSubmit}
+                onClick={() => {
+                  onSubmit()
+                  openConfirmModal()
+                }}
                 disabled={disabled}
               />
             </div>
