@@ -34,6 +34,7 @@ interface ListingReservationModalProps {
   email: string
   images: string[]
   facility: string[]
+  onReservationComplete: () => void
 }
 
 const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
@@ -49,12 +50,20 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   email,
   images = [],
   facility = [],
+  onReservationComplete,
 }) => {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
+    string | null
+  >(null)
   const openConfirmModal = useConfirmModal((state) => state.onOpen)
 
   const handlePaymentMethodSelect = (method: string) => {
     setSelectedPaymentMethod(method)
+  }
+
+  const handleBooking = () => {
+    onSubmit()
+    setTimeout(onReservationComplete, 300) // Close the modal after 1 second
   }
 
   const facilityIcons = {
@@ -169,10 +178,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
             <div className="w-full">
               <ButtonWfull
                 label="Book Now"
-                onClick={() => {
-                  onSubmit()
-                  openConfirmModal()
-                }}
+                onClick={handleBooking}
                 disabled={disabled}
               />
             </div>
@@ -193,7 +199,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
           <div className="w-full">
             <ButtonWfull
               label="Book Now"
-              onClick={onSubmit}
+              onClick={handleBooking}
               disabled={disabled}
             />
           </div>

@@ -75,6 +75,10 @@ const ListingPage: React.FC<ListingPageProps> = ({
   const location = getByValue(locationValue)
   const [isOpen, setIsOpen] = useState(false)
 
+  const handleReservationComplete = () => {
+    setIsOpen(false) // This will close the modal
+  }
+
   const pricePerDay = price
   const pricePerWeek = pricePerDay * 7 * 0.9
   const pricePerMonth = pricePerDay * 30 * 0.8
@@ -175,12 +179,12 @@ const ListingPage: React.FC<ListingPageProps> = ({
                 {description}
               </p>
             </div>
-            <ListingInfo 
-            user={user}
-            guestCount={guestCount}
-            roomCount={roomCount}
-            deskCount={deskCount}
-            address={address}
+            <ListingInfo
+              user={user}
+              guestCount={guestCount}
+              roomCount={roomCount}
+              deskCount={deskCount}
+              address={address}
             />
           </div>
         </div>
@@ -242,6 +246,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
                   disabledDates={disabledDates}
                   disabled={disabled}
                   onSubmit={onCreateReservation}
+                  onReservationComplete={handleReservationComplete}
                 />
               }
               actionLabel="Book now"
