@@ -10,6 +10,7 @@ interface ButtonProps {
   danger?: boolean
   small?: boolean
   icon?: IconType
+  children?: React.ReactNode
 }
 
 const ButtonWfull: React.FC<ButtonProps> = ({
@@ -20,6 +21,7 @@ const ButtonWfull: React.FC<ButtonProps> = ({
   danger,
   small,
   icon: Icon,
+  children,
 }) => {
   return (
     <button
@@ -65,6 +67,7 @@ const ButtonWfull: React.FC<ButtonProps> = ({
         />
       )}
       {label}
+      {children}
     </button>
   )
 }

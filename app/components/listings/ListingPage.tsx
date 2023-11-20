@@ -223,7 +223,6 @@ const ListingPage: React.FC<ListingPageProps> = ({
                 label="Book now"
                 onClick={() => setIsOpen(true)}
                 disabled={disabled}>
-                Book now
               </ButtonWfull>
             </div>
           </div>
@@ -247,6 +246,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
                   disabled={disabled}
                   onSubmit={onCreateReservation}
                   onReservationComplete={handleReservationComplete}
+                  onShowConfirmModal={() => setIsOpen(false)}
                 />
               }
               actionLabel="Book now"

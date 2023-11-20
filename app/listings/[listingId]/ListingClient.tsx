@@ -85,6 +85,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
         setTimeout(() => {
           closeConfirmationModal()
           setDateRange(initialDateRange)
+          toast.success('Reservation created successfully!')
           router.push('/account')
         }, 3000)
       })

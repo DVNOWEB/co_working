@@ -55,7 +55,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         `}>
           {/* Modal Content */}
           <div
-            className=" translate h-full lg:h-auto md:h-auto border-0 shadow-lg relative flex flex-col w-full  bg-white outline-none focus:outline-none custom-border-radius
+            className="translate h-full lg:h-auto md:h-auto md:py-40 border-0 shadow-lg relative flex flex-col w-full  bg-white outline-none focus:outline-none custom-border-radius
             ">
             <div className="flex items-center justify-center h-full">
               <div className="px-4 py-8 sm:p-6 sm:pb-4 items-center">
