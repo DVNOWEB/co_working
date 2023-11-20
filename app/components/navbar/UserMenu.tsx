@@ -17,6 +17,8 @@ import { MdAccountTree } from 'react-icons/md'
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
+  setIsOpen?: (value: boolean) => void
+  isOpen?: boolean
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({
@@ -130,9 +132,15 @@ const UserMenu: React.FC<UserMenuProps> = ({
               <div className="flex flex-row w-full  items-center px-2 hover:bg-gray-200 transition">
                 <FaHome
                   onClick={() => router.push('/')}
+                  label="Home"
+                  onCloseMenu={toggleOpen}
                   className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                 />
-                <MenuItem onClick={() => router.push('/')} label="Home" />
+                <MenuItem
+                  onClick={() => router.push('/')}
+                  label="Home"
+                  onCloseMenu={toggleOpen}
+                />
               </div>
 
               {currentUser ? (
@@ -141,11 +149,13 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <MdAccountTree
                       onClick={() => router.push('/reservations')}
                       label="Owner Dashboard"
+                      onCloseMenu={toggleOpen}
                       className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                     />
                     <MenuItem
                       onClick={() => router.push('/reservations')}
                       label="Owner Dashboard"
+                      onCloseMenu={toggleOpen}
                     />
                   </div>
 
@@ -153,12 +163,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <ImUserTie
                       onClick={onRentals}
                       label="Property owner"
+                      onCloseMenu={toggleOpen}
                       className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                     />
                     <MenuItem
                       onClick={onRentals}
                       label="
                    Property owner"
+                      onCloseMenu={toggleOpen}
                     />
                   </div>
 
@@ -166,11 +178,13 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <FaUser
                       onClick={() => router.push('/account')}
                       label="Account"
+                      onCloseMenu={toggleOpen}
                       className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                     />
                     <MenuItem
                       onClick={() => router.push('/account')}
                       label="My Account"
+                      onCloseMenu={toggleOpen}
                     />
                   </div>
 
@@ -178,9 +192,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <FiLogOut
                       onClick={signOut}
                       label="Login"
+                      onCloseMenu={toggleOpen}
                       className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                     />
-                    <MenuItem onClick={signOut} label="Logout" />
+                    <MenuItem
+                      onClick={signOut}
+                      label="Logout"
+                      onCloseMenu={toggleOpen}
+                    />
                   </div>
                 </div>
               ) : (
@@ -188,9 +207,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   <FaUser
                     onClick={openLoginModal}
                     label="Login"
+                    onCloseMenu={toggleOpen}
                     className="text-black-400 text-4xl cursor-pointer border-black-400 rounded-full p-1.5"
                   />
-                  <MenuItem onClick={openLoginModal} label="Login" />
+                  <MenuItem
+                    onClick={openLoginModal}
+                    label="Login"
+                    onCloseMenu={toggleOpen}
+                  />
                 </div>
               )}
             </div>
