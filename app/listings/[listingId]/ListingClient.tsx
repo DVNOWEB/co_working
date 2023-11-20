@@ -58,6 +58,16 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [totalPrice, setTotalPrice] = useState(listing.price)
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
+  // Function to close the confirmation modal after 3 seconds
+  const closeConfirmationModal = useCallback(() => {
+    setConfirmationModalOpen(false)
+    // Redirect to the account page after 1.5 seconds
+    setTimeout(() => {
+      toast.success('Reservation successfully created')
+      router.push('/account')
+    }, 1500)
+  }, [setConfirmationModalOpen, router])
+
   // Create a new reservation
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -87,17 +97,15 @@ const ListingClient: React.FC<ListingClientProps> = ({
       .finally(() => {
         setIsLoading(false)
       })
-  }, [currentUser, dateRange, listing?.id, loginModal, router, totalPrice])
-
-  // Function to close the confirmation modal after 3 seconds
-  const closeConfirmationModal = () => {
-    setConfirmationModalOpen(false)
-    // Redirect to the account page after 3 seconds
-    setTimeout(() => {
-      toast.success('Reservation successfully created')
-      router.push('/account')
-    }, 2000)
-  }
+  }, [
+    currentUser,
+    dateRange,
+    listing?.id,
+    loginModal,
+    router,
+    totalPrice,
+    closeConfirmationModal,
+  ])
 
   // We will change the total price when the date range changes add the discount too
   useEffect(() => {
