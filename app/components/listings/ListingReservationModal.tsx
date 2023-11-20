@@ -35,6 +35,7 @@ interface ListingReservationModalProps {
   images: string[]
   facility: string[]
   onReservationComplete: () => void
+  onShowConfirmModal: () => void
 }
 
 const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
@@ -51,6 +52,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   images = [],
   facility = [],
   onReservationComplete,
+  onShowConfirmModal = () => {},
 }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     string | null
@@ -63,7 +65,8 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
 
   const handleBooking = () => {
     onSubmit()
-    setTimeout(onReservationComplete, 300) // Close the modal after 1 second
+    setTimeout(onReservationComplete, 300)
+    openConfirmModal()
   }
 
   const facilityIcons = {

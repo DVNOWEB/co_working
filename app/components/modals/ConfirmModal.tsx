@@ -17,7 +17,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(ModalIsOpen)
   const modalIsOpen = useConfirmModal((state) => state.isOpen)
-  const modalOnClose = useConfirmModal((state) => state.onClose)
+  const closeModal = useConfirmModal((state) => state.onClose)
   const [smallScreen, setSmallScreen] = useState(false)
 
   useEffect(() => {
@@ -37,9 +37,9 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
     }
     setShowModal(false)
     setTimeout(() => {
-      modalOnClose?.()
+      closeModal?.()
     }, 300)
-  }, [disabled, modalOnClose])
+  }, [disabled, closeModal])
 
   if (!modalIsOpen) {
     return null

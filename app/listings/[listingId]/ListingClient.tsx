@@ -58,15 +58,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [totalPrice, setTotalPrice] = useState(listing.price)
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
-  // Function to close the confirmation modal after 3 seconds
   const closeConfirmationModal = useCallback(() => {
     setConfirmationModalOpen(false)
-    // Redirect to the account page after 1.5 seconds
     setTimeout(() => {
-      toast.success('Reservation successfully created')
-      router.push('/account')
-    }, 1500)
-  }, [setConfirmationModalOpen, router])
+      router.push('/account') // Redirect after 3 seconds
+    }, 3000)
+  }, [router])
 
   // Create a new reservation
   const onCreateReservation = useCallback(() => {
@@ -89,7 +86,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
           closeConfirmationModal()
           setDateRange(initialDateRange)
           router.push('/account')
-        }, 10000)
+        }, 3000)
       })
       .catch(() => {
         toast.error('Something went wrong!')
