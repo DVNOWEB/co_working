@@ -33,7 +33,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           <div>{deskCount} desc</div>
         </div>
       </div>
-      <div className="flex flex-col w-full custom-card-border-radius mb-10 min-h-[200px] max-h-[400px]">
+      <div className="w-full hidden md:block custom-card-border-radius mb-10 min-h-[200px] max-h-[400px]">
         <ListingMap 
         address={address} 
         />

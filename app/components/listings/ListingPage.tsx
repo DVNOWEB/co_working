@@ -23,6 +23,7 @@ import ListingModal from '../modals/ListingModal'
 import ButtonWfull from '../ButtonWfull'
 import Reviews from './Reviews'
 import ListingInfo from './ListingInfo'
+import ListingMap from './ListingMap'
 
 interface ListingPageProps {
   title: string
@@ -254,6 +255,9 @@ const ListingPage: React.FC<ListingPageProps> = ({
           )}
 
           <Reviews />
+          <div className="w-full block md:hidden custom-card-border-radius mb-10 min-h-[200px] max-h-[400px]">
+            <ListingMap address={address} />
+          </div>
         </div>
       </div>
     </>
