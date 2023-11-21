@@ -37,7 +37,11 @@ const Button: React.FC<ButtonProps> = ({
         transition
         w-4/6
         m-auto
-        ${outline ? 'bg-white' : 'bg-green-600'}
+        ${
+          outline
+            ? 'bg-white'
+            : 'bg-green-600 shadow-lg shadow-black md:shadow-none'
+        }
         ${outline ? 'border-gray-600' : 'border-green-600'}
         ${outline ? 'border-2 ' : 'border-1'}
         ${

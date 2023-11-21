@@ -27,7 +27,7 @@ const ButtonWfull: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={` custom-buttom-radius disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-[90vw] m-auto fixed md:relative bottom-0 p-3 my-6
+      className={`custom-buttom-radius disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-80 transition w-[90vw] m-auto fixed md:relative bottom-0 p-3 my-6
         ${
           outline
             ? 'bg-white'

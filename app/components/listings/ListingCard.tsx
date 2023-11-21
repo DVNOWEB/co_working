@@ -5,7 +5,7 @@ import { Listing, Reservation } from '@prisma/client'
 
 import { SafeReservation, SafeUser } from '@/app/types'
 import useCountries from '@/app/hooks/useCountries'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
 import Image from 'next/image'
 
@@ -31,6 +31,7 @@ interface ListingCardProps {
   actionLabel?: string
   actionId?: string
   currentUser?: SafeUser | null
+  startDelay?: number
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -41,9 +42,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
   actionLabel,
   actionId = '',
   currentUser,
+  startDelay = 0,
 }) => {
   const router = useRouter()
   const { getByValue } = useCountries()
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const location = getByValue(data.locationValue)
 
@@ -71,6 +74,33 @@ const ListingCard: React.FC<ListingCardProps> = ({
     },
     [onAction, actionId, disabled]
   )
+
+  useEffect(() => {
+    
+    const getRandomImageIndex = () => {
+      let newIndex
+      do {
+        newIndex = Math.floor(Math.random() * data.images.length)
+      } while (newIndex === currentImageIndex)
+      return newIndex
+    }
+
+    let intervalId: number | undefined
+
+    const timeoutId = setTimeout(() => {
+      intervalId = window.setInterval(() => {
+        setCurrentImageIndex(getRandomImageIndex())
+      }, 6000) as unknown as number 
+    }, startDelay)
+
+    return () => {
+      clearTimeout(timeoutId)
+      if (intervalId !== undefined) {
+        clearInterval(intervalId)
+      }
+    }
+  }, [currentImageIndex, data.images.length, startDelay])
+
 
   const price = useMemo(() => {
     if (reservation) {
@@ -103,8 +133,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
           <Image
             fill
             alt="Listing"
-            src={data.images[0]} // Use 'data.images' instead of 'data.imageSrc'
-            className="h-[598px] absolute object-cover group-hover:scale-110 transition-all duration-500"
+            src={data.images[currentImageIndex]}
+            className="h-[598px] absolute object-cover"
           />
           <div className="absolute top-2 left-2 flex items-center gap-1 bg-white custom-input-radius px-2 py-1">
             <FaStar className="text-yellow-500" />
@@ -157,6 +187,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
       </div>
     </div>
   )
-};
+}
 
 export default ListingCard

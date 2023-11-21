@@ -4,6 +4,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Range } from 'react-date-range'
+import { calculateTotalPrice } from '@/app/libs/priceUtils'
 
 import { SafeReservation, SafeUser } from '@/app/types'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -105,19 +106,14 @@ const ListingClient: React.FC<ListingClientProps> = ({
     closeConfirmationModal,
   ])
 
-  // We will change the total price when the date range changes add the discount too
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(
-        dateRange.endDate,
-        dateRange.startDate
+      const newTotalPrice = calculateTotalPrice(
+        listing.price,
+        dateRange.startDate,
+        dateRange.endDate
       )
-      // calculate the total price
-      if (dayCount && listing.price) {
-        setTotalPrice(dayCount * listing.price)
-      } else {
-        setTotalPrice(listing.price)
-      }
+      setTotalPrice(newTotalPrice)
     }
   }, [dateRange, listing.price])
 

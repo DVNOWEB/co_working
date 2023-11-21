@@ -1,5 +1,6 @@
 'use client'
 
+import { normalize } from 'path'
 import { IconType } from 'react-icons'
 
 interface ButtonProps {
@@ -27,8 +28,12 @@ const ButtonWfull: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`custom-buttom-radius relative disabled:opacity-70 disabled:cursor-not-allowed p-2 rounded-lg hover:opacity-80 transition w-full m-auto 
-        ${outline ? 'bg-white' : 'bg-green-600'}
+      className={`custom-buttom-radius disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-80 transition w-full md:relative bottom-0 p-3 
+        ${
+          outline
+            ? 'bg-white'
+            : 'bg-green-600 shadow-lg border-2 shadow-black md:shadow-none '
+        }
         ${outline ? 'border-gray-600' : 'border-green-600'}
         ${outline ? 'border-2 ' : 'border-1'}
         ${

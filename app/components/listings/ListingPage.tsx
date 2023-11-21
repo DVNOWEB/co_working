@@ -75,6 +75,8 @@ const ListingPage: React.FC<ListingPageProps> = ({
   const { getByValue } = useCountries()
   const location = getByValue(locationValue)
   const [isOpen, setIsOpen] = useState(false)
+  const [mainImage, setMainImage] = useState(images[0])
+  const [defaultImage, setDefaultImage] = useState(images[0])
 
   const handleReservationComplete = () => {
     setIsOpen(false) // This will close the modal
@@ -104,7 +106,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
           <div className="flex">
             <Image
               alt="Property Image"
-              src={images[0]}
+              src={mainImage}
               layout="fill"
               objectFit="cover"
             />
@@ -116,7 +118,9 @@ const ListingPage: React.FC<ListingPageProps> = ({
             {images.slice(1, 3).map((image, index) => (
               <div
                 key={index}
-                className="md:w-[15vw] w-[23vw] md:h-[19.8vh] h-[15vh] overflow-hidden relative">
+                className="md:w-[15vw] w-[23vw] md:h-[19.8vh] h-[15vh] overflow-hidden relative"
+                onMouseEnter={() => setMainImage(image)}
+                onMouseLeave={() => setMainImage(defaultImage)}>
                 <Image
                   alt={`Image ${index}`}
                   src={image}
@@ -130,7 +134,9 @@ const ListingPage: React.FC<ListingPageProps> = ({
             {images.slice(3, 5).map((image, index) => (
               <div
                 key={index}
-                className="md:w-[15vw] w-[24vw] md:h-[19.9vh] h-[15vh] overflow-hidden relative">
+                className="md:w-[15vw] w-[24vw] md:h-[19.9vh] h-[15vh] overflow-hidden relative"
+                onMouseEnter={() => setMainImage(image)}
+                onMouseLeave={() => setMainImage(defaultImage)}>
                 <Image
                   alt={`Image ${index}`}
                   src={image}
@@ -223,7 +229,8 @@ const ListingPage: React.FC<ListingPageProps> = ({
               <ButtonWfull
                 label="Book now"
                 onClick={() => setIsOpen(true)}
-                disabled={disabled}></ButtonWfull>
+                disabled={disabled}>
+              </ButtonWfull>
             </div>
           </div>
           {isOpen && (

@@ -5,6 +5,7 @@ import useConfirmModal from '@/app/hooks/useConfirmModal'
 import { Range } from 'react-date-range'
 import Image from 'next/image'
 import Calendar from '../Calendar'
+import { calculateTotalPrice } from '@/app/libs/priceUtils'
 
 import { AiOutlineMail, AiOutlineWifi } from 'react-icons/ai'
 import { CgGym } from 'react-icons/cg'
@@ -20,6 +21,7 @@ import { PiMapPinLight } from 'react-icons/pi'
 
 import ButtonListingModal from '../ButtonListingModal'
 import PaymentMetod from '../PaymentMetod'
+import { differenceInCalendarDays } from 'date-fns'
 
 interface ListingReservationModalProps {
   price: number
@@ -58,6 +60,12 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
     string | null
   >(null)
   const openConfirmModal = useConfirmModal((state) => state.onOpen)
+
+  const totalPriceString = calculateTotalPrice(
+    price,
+    dateRange.startDate,
+    dateRange.endDate
+  )
 
   const handlePaymentMethodSelect = (method: string) => {
     setSelectedPaymentMethod(method)
@@ -171,7 +179,8 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
                 Total Price:
               </div>
               <div className="text-2xl text-neutral-700 font-semibold">
-                ${totalPrice}
+                {/* ${totalPrice} */}
+                ${totalPriceString}
               </div>
             </div>
             <hr className="pb-1 md:hidden" />
@@ -198,8 +207,8 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
           </div>
         </div>
         {/* Button */}
-        <div className="order-5 md:order-5 w-full md:hidden">
-          <div className="w-full">
+        <div className="order-5 md:order-5 md:hidden">
+          <div className="w-full overflow-hidden">
             <ButtonListingModal
               label="Book Now"
               onClick={handleBooking}

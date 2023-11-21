@@ -11,6 +11,7 @@ import AccountCard from '../components/account/AccountCard'
 
 import { SafeReservation, SafeUser } from '../types'
 import { useCallback, useState } from 'react'
+import Footer from '../components/Footer'
 
 interface AccountClientProps {
   reservations: SafeReservation[]
@@ -111,6 +112,7 @@ const AccountClient: React.FC<AccountClientProps> = ({
           ))}
         </div>
       </Container>
+      <Footer />
     </div>
   )
 }
