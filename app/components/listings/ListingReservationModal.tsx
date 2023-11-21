@@ -18,7 +18,7 @@ import { GrLounge } from 'react-icons/gr'
 import { LuMonitorCheck } from 'react-icons/lu'
 import { PiMapPinLight } from 'react-icons/pi'
 
-import ButtonWfull from '../ButtonWfull'
+import ButtonListingModal from '../ButtonListingModal'
 import PaymentMetod from '../PaymentMetod'
 
 interface ListingReservationModalProps {
@@ -179,7 +179,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
           {/* Button */}
           <div className="order-5 hidden md:block md:order-5 w-full">
             <div className="w-full">
-              <ButtonWfull
+              <ButtonListingModal
                 label="Book Now"
                 onClick={handleBooking}
                 disabled={disabled}
@@ -200,7 +200,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         {/* Button */}
         <div className="order-5 md:order-5 w-full md:hidden">
           <div className="w-full">
-            <ButtonWfull
+            <ButtonListingModal
               label="Book Now"
               onClick={handleBooking}
               disabled={disabled}

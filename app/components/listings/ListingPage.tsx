@@ -222,8 +222,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
               <ButtonWfull
                 label="Book now"
                 onClick={() => setIsOpen(true)}
-                disabled={disabled}>
-              </ButtonWfull>
+                disabled={disabled}></ButtonWfull>
             </div>
           </div>
           {isOpen && (
