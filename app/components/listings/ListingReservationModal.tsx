@@ -21,7 +21,6 @@ import { PiMapPinLight } from 'react-icons/pi'
 
 import ButtonListingModal from '../ButtonListingModal'
 import PaymentMetod from '../PaymentMetod'
-import { differenceInCalendarDays } from 'date-fns'
 
 interface ListingReservationModalProps {
   price: number
@@ -91,7 +90,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   }
 
   return (
-    <div className="flex flex-col overflow-x-hidden overflow-y-auto outline-none focus:outline-none ">
+    <div className="flex flex-col overflow-hidden outline-none focus:outline-none ">
       <div className="flex flex-col md:flex-row w-full">
         {/* Date and Calendar */}
         <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">
@@ -99,7 +98,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
             <div>
               <hr className="mt-14 md:hidden" />
               <div className="my-3">
-                <span className="text-5xl inline font-bold text-neutral-700">
+                <span className="text-4xl inline font-bold text-neutral-700">
                   Choose dates
                 </span>
               </div>
@@ -130,7 +129,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
             height={300}
           />
           <div className="flex flex-col">
-            <div className="text-2xl mt-5 font-semibold">{title}</div>
+            <div className="text-2xl mt-4 font-semibold">{title}</div>
             <div className="flex flex-col mt-1">
               <span className="flex items-baseline gap-2 font-light text-gray-500">
                 <PiMapPinLight size={16} />
@@ -175,11 +174,10 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
           {/* Total Price */}
           <div className="order-3 md:order-4 w-full">
             <div className="flex flex-row justify-between pt-6 my-5">
-              <div className="text-2xl text-neutral-700 font-semibold">
+              <div className="text-xl text-neutral-700 font-semibold">
                 Total Price:
               </div>
-              <div className="text-2xl text-neutral-700 font-semibold">
-                {/* ${totalPrice} */}
+              <div className="text-xl text-neutral-700 font-semibold">
                 ${totalPriceString}
               </div>
             </div>
@@ -198,24 +196,24 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         </div>
 
         {/* Payment Method and Icons */}
-        <div className="order-4 md:order-3 flex flex-col my-3 md:hidden">
+        <div className="order-4 md:order-3 flex flex-col gap-3 my-4 md:hidden">
           <div className="order-3 flex flex-col">
             <PaymentMetod
               onSelectPaymentMethod={handlePaymentMethodSelect}
               selectedMethod={selectedPaymentMethod}
             />
           </div>
-        </div>
-        {/* Button */}
-        <div className="order-5 md:order-5 md:hidden">
-          <div className="w-full overflow-hidden">
-            <ButtonListingModal
-              label="Book Now"
-              onClick={handleBooking}
-              disabled={disabled}
-            />
+          <div className="order-5 md:order-5 md:hidden">
+            <div className="w-full">
+              <ButtonListingModal
+                label="Book Now"
+                onClick={handleBooking}
+                disabled={disabled}
+              />
+            </div>
           </div>
         </div>
+        {/* Button */}
       </div>
     </div>
   )

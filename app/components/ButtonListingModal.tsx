@@ -32,7 +32,7 @@ const ButtonWfull: React.FC<ButtonProps> = ({
         ${
           outline
             ? 'bg-white'
-            : 'bg-green-600 shadow-lg border-2 shadow-black md:shadow-none '
+            : 'bg-green-600 shadow-lg border-2 shadow-slate-600 md:shadow-none '
         }
         ${outline ? 'border-gray-600' : 'border-green-600'}
         ${outline ? 'border-2 ' : 'border-1'}

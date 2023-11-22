@@ -16,50 +16,6 @@ interface EditReservationModalProps {
   onCancel: () => void
 }
 
-// const EditReservationModal: React.FC<EditReservationModalProps> = ({
-//   reservationId,
-//   originalDateRange,
-//   price,
-//   onReservationUpdated,
-//   onCancel,
-// }) => {
-//   const [dateRange, setDateRange] = useState<Range>(originalDateRange)
-//   const [totalPrice, setTotalPrice] = useState<number>(0)
-
-//   useEffect(() => {
-//     // Assuming calculateTotalPrice returns a number
-//     const newTotalPrice = calculateTotalPrice(
-//       price,
-//       dateRange.startDate,
-//       dateRange.endDate
-//     )
-    
-//     setTotalPrice(newTotalPrice)
-//   }, [dateRange, price])
-
-//   const handleUpdateReservation = async () => {
-//     if (!reservationId || !dateRange.startDate || !dateRange.endDate) {
-//       toast.error('Missing reservation details')
-//       return
-//     }
-//     try {
-//       const response = await axios.put(`/api/reservations/${reservationId}`, {
-//         startDate: dateRange.startDate,
-//         endDate: dateRange.endDate,
-//         totalPrice,
-//       })
-
-//       if (response.status === 200) {
-//         toast.success('Reservation updated successfully')
-//         onReservationUpdated()
-//       } else {
-//         throw new Error('Failed to update reservation')
-//       }
-//     } catch (error) {
-//       toast.error('Failed to update reservation')
-//     }
-//   }
-
 const EditReservationModal: React.FC<EditReservationModalProps> = ({
   reservationId,
   originalDateRange,
@@ -111,22 +67,23 @@ const EditReservationModal: React.FC<EditReservationModalProps> = ({
 
 
   return (
-    <div className="edit-reservation-modal">
+    <div className="custom-border-radius border-gray-100 border-1 shadow-lg shadow-black px-5 my-5 overflow-hidden">
       <Calendar
         value={dateRange}
         onChange={(value) => setDateRange(value.selection)}
       />
 
-      <div className="total-price">
-        New Total Price: ${totalPrice.toString()}
+      <div className="flex flex-row justify-end my-10 font-bold">
+        <span className="font-normal pr-2">New Total Price: </span> $
+        {totalPrice.toString()}
       </div>
 
-      <div className="modal-actions">
+      <div className="flex flex-col gap-3 my-10 ">
         <ButtonListingModal
           label="Confirm Changes"
           onClick={handleUpdateReservation}
         />
-        <ButtonListingModal label="Cancel Reservation" onClick={onCancel} />
+        <ButtonListingModal danger label="Cancel Changes" onClick={onCancel} />
       </div>
     </div>
   )
