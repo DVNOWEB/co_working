@@ -28,13 +28,14 @@ interface ListingWithFlexibleDate extends Omit<Listing, 'createdAt'> {
 
 interface AccountCardProps {
   data: ListingWithFlexibleDate
-  reservation?: SafeReservation
+  reservation: SafeReservation
   onAction?: (id: string) => void
   disabled?: boolean
   actionLabel?: string
   actionId?: string
   currentUser?: SafeUser | null
   isOld?: boolean
+  onEdit: (reservation?: SafeReservation) => void
 }
 
 const AccountCard: React.FC<AccountCardProps> = ({
@@ -46,6 +47,7 @@ const AccountCard: React.FC<AccountCardProps> = ({
   actionId = '',
   currentUser,
   isOld = false,
+  onEdit,
 }) => {
   const router = useRouter()
   const { getByValue } = useCountries()
@@ -165,7 +167,10 @@ const AccountCard: React.FC<AccountCardProps> = ({
           <div className="flex md:py-5 py-3 px-1 flex-col justify-between">
             <div className="flex flex-col gap-4">
               {!isOld && (
-                <FaPencilAlt className="md:text-3xl text-xl text-zinc-800 cursor-pointer" />
+                <FaPencilAlt
+                  className="md:text-3xl text-xl text-zinc-800 cursor-pointer"
+                  onClick={() => onEdit(reservation)}
+                />
               )}
               <div className="flex ">
                 {onAction && actionLabel && (

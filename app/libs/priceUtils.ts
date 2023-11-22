@@ -6,7 +6,7 @@ export const calculateTotalPrice = (
   endDate: Date | null | undefined
 ) => {
   if (!startDate || !endDate) {
-    return '0.00'
+    return 0
   }
 
   const numberOfDays =

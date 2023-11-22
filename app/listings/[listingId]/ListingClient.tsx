@@ -8,7 +8,7 @@ import { calculateTotalPrice } from '@/app/libs/priceUtils'
 
 import { SafeReservation, SafeUser } from '@/app/types'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { differenceInCalendarDays, eachDayOfInterval } from 'date-fns'
+import { eachDayOfInterval } from 'date-fns'
 
 import { facilities } from '@/app/components/Facilities'
 import ListingPage from '@/app/components/listings/ListingPage'
