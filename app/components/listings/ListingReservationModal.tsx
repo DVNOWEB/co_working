@@ -90,7 +90,7 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
   }
 
   return (
-    <div className="flex flex-col overflow-hidden outline-none focus:outline-none ">
+    <div className="flex flex-col overflow-y-hidden outline-none focus:outline-none ">
       <div className="flex flex-col md:flex-row w-full">
         {/* Date and Calendar */}
         <div className="order-1 md:order-1 flex flex-col justify-between bg-white rounded-xl md:w-[50%] md:pr-3">

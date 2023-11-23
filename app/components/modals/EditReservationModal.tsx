@@ -67,7 +67,7 @@ const EditReservationModal: React.FC<EditReservationModalProps> = ({
 
 
   return (
-    <div className="custom-border-radius border-gray-100 border-1 shadow-lg shadow-black px-5 my-5 overflow-hidden">
+    <div className="custom-border-radius border-gray-100 border-1 shadow-lg shadow-slate-400 px-5 my-5 overflow-hidden">
       <Calendar
         value={dateRange}
         onChange={(value) => setDateRange(value.selection)}

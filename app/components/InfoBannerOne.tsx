@@ -26,7 +26,6 @@ const InfoBannerOne = () => {
             alt="InfoBannerOne"
             width={1200}
             height={800}
-            layout="responsive"
           />
         </div>
       </div>

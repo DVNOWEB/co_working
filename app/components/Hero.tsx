@@ -5,26 +5,21 @@ import Image from 'next/image'
 
 const Hero = () => {
   return (
-    <div className="relative">
-      {/* Image placed at the top */}
+    <div className="relative flex flex-col">
       <Image
         className="w-full lg:h-[80vh] md:h-[60vh] sm:h-[60vh] h-[60vh] object-cover object-top"
         src={hero1}
         alt="Hero Image"
       />
 
-      {/* Dark overlay to make the image slightly darker */}
-      <div className="absolute inset-0 bg-gray opacity-10"></div>
-
-      {/* Text centered on top of the image */}
-      <div className="absolute inset-0 flex items-center justify-center pb-36">
-        <div className="text-center text-white relative">
-          <h1 className="text-white font-extrabold mix-blend-overlay hero-text">
+      <div className="absolute top-60 inset-0 flex justify-center">
+        <div className="text-center text-white relative responsive">
+          <h1 className="text-white font-extrabold relative mix-overlay hero-text">
             CO-WORKING
-          </h1>
-          <span className="text-white font-semibold tracking-wider mix-blend-difference hero-span absolute bottom-2 sm:bottom-5 md:bottom-7 right-0">
+          <span className="text-center absolute font-semibold tracking-wider mix-blend-difference hero-span bottom-3 sm:bottom-5 md:bottom-6 right-0">
             BANGKOK
           </span>
+          </h1>
         </div>
       </div>
     </div>

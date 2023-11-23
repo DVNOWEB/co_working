@@ -50,14 +50,6 @@ const AccountClient: React.FC<AccountClientProps> = ({
     [router]
   )
 
-  // const sortedReservations = [...reservations].sort(
-  //   (a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime()
-  // )
-
-  // const isReservationOld = (startDate: string) => {
-  //   return !isAfter(parseISO(startDate), startOfToday())
-  // }
-
   const isReservationOld = useCallback((startDate: string) => {
     return !isAfter(parseISO(startDate), startOfToday())
   }, [])
@@ -77,16 +69,6 @@ const AccountClient: React.FC<AccountClientProps> = ({
     }
   }, [reservations, isReservationOld])
 
-
-
-  // const newReservations = sortedReservations.filter(
-  //   (reservation) => !isReservationOld(reservation.startDate)
-  // )
-
-  // const oldReservations = sortedReservations.filter((reservation) =>
-  //   isReservationOld(reservation.startDate)
-  // )
-
   const handleEditReservation = useCallback(
     (reservation: SafeReservation | undefined) => {
       setEditingReservation(reservation || null) // Convert undefined to null
@@ -94,7 +76,6 @@ const AccountClient: React.FC<AccountClientProps> = ({
     },
     []
   )
-
 
   return (
     <div>

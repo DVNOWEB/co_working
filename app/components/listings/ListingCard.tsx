@@ -135,6 +135,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             alt="Listing"
             src={data.images[currentImageIndex]}
             className="h-[598px] absolute object-cover"
+            sizes="(max-width: 600px) 100vw, 50vw"
           />
           <div className="absolute top-2 left-2 flex items-center gap-1 bg-white custom-input-radius px-2 py-1">
             <FaStar className="text-yellow-500" />
