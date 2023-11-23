@@ -122,9 +122,9 @@ const ListingReservationModal: React.FC<ListingReservationModalProps> = ({
         {/* Image, Title, Address, Facilities */}
         <div className="order-2 md:order-2 flex justify-between flex-col md:pl-3 md:w-[50%]">
           <Image
-            className="custom-card-border-radius"
-            src={images[0]}
+            className="custom-card-border-radius object-cover"
             alt="Property Image"
+            src={images[0]}
             width={800}
             height={300}
           />

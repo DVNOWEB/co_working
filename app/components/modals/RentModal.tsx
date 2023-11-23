@@ -290,7 +290,7 @@ const RentModal = () => {
         />
         <Input
           id="price"
-          label="Price in Euro"
+          label="Price in Dollar"
           formatPrice={true}
           type="number"
           disabled={isLoading}

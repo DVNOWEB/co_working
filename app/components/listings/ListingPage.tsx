@@ -103,14 +103,14 @@ const ListingPage: React.FC<ListingPageProps> = ({
     <>
       <div className="w-full flex flex-col md:flex-row justify-center mt-24 gap-x-1 overflow-hidden custom-listing-border-radius">
         <div className="w-full h-[40vh] md:w-[70vw] md:h-[40vh] mb-1 overflow-hidden relative">
-          <div className="flex">
-            <Image
-              alt="Property Image"
-              src={mainImage}
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
+          <Image
+            fill
+            className="object-cover"
+            alt="Property Image"
+            src={mainImage}
+            sizes="(min-width: 768px) 70vw, 100vw"
+            priority
+          />
         </div>
 
         <div className="flex flex-row md:flex-col gap-1">
@@ -122,10 +122,11 @@ const ListingPage: React.FC<ListingPageProps> = ({
                 onMouseEnter={() => setMainImage(image)}
                 onMouseLeave={() => setMainImage(defaultImage)}>
                 <Image
+                  fill
                   alt={`Image ${index}`}
                   src={image}
-                  layout="fill"
-                  objectFit="cover"
+                  className="object-cover"
+                  sizes="(min-width: 768px) 15vw, 100vw"
                 />
               </div>
             ))}
@@ -138,10 +139,11 @@ const ListingPage: React.FC<ListingPageProps> = ({
                 onMouseEnter={() => setMainImage(image)}
                 onMouseLeave={() => setMainImage(defaultImage)}>
                 <Image
+                  fill
                   alt={`Image ${index}`}
                   src={image}
-                  layout="fill"
-                  objectFit="cover"
+                  className="object-cover"
+                  sizes="(min-width: 768px) 15vw, 100vw"
                 />
               </div>
             ))}
@@ -209,16 +211,16 @@ const ListingPage: React.FC<ListingPageProps> = ({
           </div>
           <div className="w-full py-3">
             <p className="py-2 text-gray-400">
-              ${pricePerDay.toFixed(2)} / day
+              ${pricePerDay.toFixed(0)} / day
             </p>
             <p className="py-2 text-gray-400">
-              ${pricePerWeek.toFixed(2)} / week{' '}
+              ${pricePerWeek.toFixed(0)} / week{' '}
               <span className="text-red-600 border-red-500 border-[1px] px-1 custom-small-radius ml-2">
                 10% Off
               </span>
             </p>
             <p className="py-2 text-gray-400">
-              ${pricePerMonth.toFixed(2)} / month
+              ${pricePerMonth.toFixed(0)} / month
               <span className="text-red-600 border-red-500 border-[1px] px-1 custom-small-radius ml-2">
                 20% Off
               </span>
@@ -229,8 +231,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
               <ButtonWfull
                 label="Book now"
                 onClick={() => setIsOpen(true)}
-                disabled={disabled}>
-              </ButtonWfull>
+                disabled={disabled}></ButtonWfull>
             </div>
           </div>
           {isOpen && (

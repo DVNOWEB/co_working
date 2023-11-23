@@ -76,16 +76,14 @@ const Footer = () => {
             <Image
               src={iconfooter}
               alt="icon footer"
-              width={120}
-              height={50}
               className="object-contain"
+              sizes="(height: 50px, width: 120px)"
             />
             <Image
               src={iconfooter1}
               alt="icon footer"
-              width={140}
-              height={50}
               className="object-contain"
+              sizes="(height: 50px, width: 140px)"
             />
           </div>
           <div className="flex flex-row gap-2">
@@ -97,7 +95,8 @@ const Footer = () => {
 
         {/* COPYRIGHT */}
         <div className="flex flex-row justify-center text-white font-medium gap-3 pb-5">
-         <FaRegCopyright size={24}/><span>CO-WORKING Bangkok 2023</span>
+          <FaRegCopyright size={24} />
+          <span>CO-WORKING Bangkok 2023</span>
         </div>
       </div>
     </div>
