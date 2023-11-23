@@ -15,7 +15,6 @@ const Calendar: React.FC<CalendarProps> = ({
   onChange,
   disabledDates,
 }) => {
-  console.log('Props received by Calendar:', { value, onChange, disabledDates })
   return (
     <DateRange
       rangeColors={['#262626']}

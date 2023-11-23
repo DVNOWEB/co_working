@@ -1,5 +1,4 @@
 import ClientOnly from '../components/ClientOnly'
-
 import getCurrentUser from '../actions/getCurrentUser'
 import getReservations from '../actions/getReservations'
 import OwnerReservationClient from './OwnerReservationClient'

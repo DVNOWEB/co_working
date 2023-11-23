@@ -71,7 +71,8 @@ const AccountClient: React.FC<AccountClientProps> = ({
 
   const handleEditReservation = useCallback(
     (reservation: SafeReservation | undefined) => {
-      setEditingReservation(reservation || null) // Convert undefined to null
+      setEditingReservation(reservation || null) 
+      
       setIsEditModalOpen(!!reservation)
     },
     []

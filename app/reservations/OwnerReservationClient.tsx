@@ -3,14 +3,15 @@
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+import { isAfter, parseISO, startOfToday } from 'date-fns'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { SafeReservation, SafeUser } from '../types'
 
 import Container from '../components/Container'
 import HeadingAccount from '../components/HeadingAccount'
 import AccountCard from '../components/account/AccountCard'
-import { isAfter, parseISO, startOfToday } from 'date-fns'
+import EditReservationModal from '../components/modals/EditReservationModal'
 
 interface OwnerReservationClientProps {
   reservations: SafeReservation[]
@@ -23,6 +24,9 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
 }) => {
   const router = useRouter()
   const [deletingId, setDeletingId] = useState('')
+  const [editingReservation, setEditingReservation] =
+    useState<SafeReservation | null>(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const onCancel = useCallback(
     (id: string) => {
@@ -44,22 +48,32 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
     [router]
   )
 
-  const isReservationOld = (startDate: string) => {
+  const isReservationOld = useCallback((startDate: string) => {
     return !isAfter(parseISO(startDate), startOfToday())
-  }
+  }, [])
 
-  const sortedReservations = [...reservations].sort(
-    (a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime()
-  )
+ const { newReservations, oldReservations } = useMemo(() => {
+   const sortedReservations = [...reservations].sort(
+     (a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime()
+   )
+   return {
+     newReservations: sortedReservations.filter(
+       (reservation) => !isReservationOld(reservation.startDate)
+     ),
+     oldReservations: sortedReservations.filter((reservation) =>
+       isReservationOld(reservation.startDate)
+     ),
+   }
+ }, [reservations, isReservationOld])
 
-  const newReservations = sortedReservations.filter(
-    (reservation) => !isReservationOld(reservation.startDate)
-  )
-
-  const oldReservations = sortedReservations.filter((reservation) =>
-    isReservationOld(reservation.startDate)
-  )
-
+ const handleEditReservation = useCallback(
+   (reservation: SafeReservation | undefined) => {
+     setEditingReservation(reservation || null) 
+     
+     setIsEditModalOpen(!!reservation)
+   },
+   []
+ )
   return (
     <>
       <Container>
@@ -72,7 +86,9 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
       </Container>
 
       <div className="flex flex-row py-3 xl:px-20 lg:px-8 md:px-10 sm:px-5 px-5 bg-neutral-700">
-        <span className="px-2 text-white text-2xl font-bold">New Reservations</span>
+        <span className="px-2 text-white text-2xl font-bold">
+          New Reservations
+        </span>
       </div>
 
       <Container>
@@ -87,8 +103,24 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
               disabled={deletingId === reservation.id}
               actionLabel="Cancel guest reservation"
               currentUser={currentUser}
+              onEdit={handleEditReservation}
             />
           ))}
+          {isEditModalOpen && editingReservation && (
+            <EditReservationModal
+              reservationId={editingReservation.id}
+              originalDateRange={{
+                startDate: new Date(editingReservation.startDate),
+                endDate: new Date(editingReservation.endDate),
+                key: 'selection',
+              }}
+              price={editingReservation.listing.price}
+              onReservationUpdated={() => {
+                setIsEditModalOpen(false)
+              }}
+              onCancel={() => setIsEditModalOpen(false)}
+            />
+          )}
         </div>
       </Container>
 
@@ -97,22 +129,38 @@ const OwnerReservationClient: React.FC<OwnerReservationClientProps> = ({
           Old Reservations
         </span>
       </div>
-        <Container>
-          <div>
-            {oldReservations.map((reservation: any) => (
-              <AccountCard
-                key={reservation.id}
-                data={reservation.listing}
-                reservation={reservation}
-                actionId={reservation.id}
-                onAction={onCancel}
-                disabled={deletingId === reservation.id}
-                actionLabel="Cancel guest reservation"
-                currentUser={currentUser}
-              />
-            ))}
-          </div>
-        </Container>
+      <Container>
+        <div>
+          {oldReservations.map((reservation: any) => (
+            <AccountCard
+              key={reservation.id}
+              data={reservation.listing}
+              reservation={reservation}
+              actionId={reservation.id}
+              onAction={onCancel}
+              disabled={deletingId === reservation.id}
+              actionLabel="Cancel guest reservation"
+              currentUser={currentUser}
+              onEdit={handleEditReservation}
+            />
+          ))}
+          {isEditModalOpen && editingReservation && (
+            <EditReservationModal
+              reservationId={editingReservation.id}
+              originalDateRange={{
+                startDate: new Date(editingReservation.startDate),
+                endDate: new Date(editingReservation.endDate),
+                key: 'selection',
+              }}
+              price={editingReservation.listing.price}
+              onReservationUpdated={() => {
+                setIsEditModalOpen(false)
+              }}
+              onCancel={() => setIsEditModalOpen(false)}
+            />
+          )}
+        </div>
+      </Container>
     </>
   )
 }

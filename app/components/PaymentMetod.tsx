@@ -36,12 +36,7 @@ const PaymentMetod: React.FC<PaymentMetodProps> = ({
               ? 'border-green-500 border-2 p-1 rounded-xl'
               : ''
           }`}>
-          <Image
-            src={PayPalIcon}
-            alt="Pay with PayPal"
-            width={80}
-            height={90}
-          />
+          <Image src={PayPalIcon} alt="Pay with PayPal" className="w-16" />
         </div>
 
         {/* Visa and MasterCard Icons Group */}
@@ -54,15 +49,13 @@ const PaymentMetod: React.FC<PaymentMetodProps> = ({
           <Image
             src={VisaIcon}
             alt="Pay with Visa"
-            width={70}
-            height={90}
+            className="w-16"
             onClick={() => onSelectPaymentMethod('visa')}
           />
           <Image
             src={MasterCardIcon}
             alt="Pay with MasterCard"
-            width={70}
-            height={90}
+            className="w-16"
             onClick={() => onSelectPaymentMethod('mastercard')}
           />
         </div>

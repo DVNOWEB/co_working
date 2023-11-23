@@ -9,6 +9,7 @@ import InfoBannerOne from './components/InfoBannerOne'
 import InfoBannerTwo from './components/InfoBannerTwo'
 import Footer from './components/Footer'
 import ArraySlicer from './components/ArraySlicer'
+import EmptyState from './components/EmptyState'
 
 interface HomeProps {
   searchParams: IListingsParams
@@ -19,7 +20,14 @@ const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
-    return <div className="text-center">No listings found!</div>
+    return (
+      <ClientOnly>
+        <EmptyState
+          title="No listings found"
+          subtitle="Come back later or try a different search term."
+        />
+      </ClientOnly>
+    )
   }
 
   return (
