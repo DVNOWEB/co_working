@@ -11,7 +11,7 @@ interface ConfirmModalProps {
 }
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
-  isOpen: ModalIsOpen, // Rename the prop here
+  isOpen: ModalIsOpen,
   onClose,
   disabled,
 }) => {

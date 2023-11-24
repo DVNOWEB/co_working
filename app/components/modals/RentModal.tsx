@@ -302,7 +302,6 @@ const RentModal = () => {
     )
   }
 
-
   return (
     <Modal
       isOpen={rentModal.isOpen}

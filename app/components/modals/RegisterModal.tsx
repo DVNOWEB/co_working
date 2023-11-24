@@ -1,7 +1,6 @@
 'use client'
 
 import axios from 'axios'
-// import { FcGoogle } from 'react-icons/fc'
 import { useCallback, useState } from 'react'
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
@@ -10,7 +9,6 @@ import useLoginModal from '@/app/hooks/useLoginModal'
 import Modal from './Modal'
 import Input from '../inputs/Input'
 import { toast } from 'react-hot-toast'
-// import Button from '../Button'
 
 const RegisterModal = () => {
   const loginModal = useLoginModal()
@@ -113,19 +111,6 @@ const RegisterModal = () => {
     </div>
   )
 
-  // Footer content
-  // const footerContent = (
-  //   <div className="flex flex-col mt-3 gap-4 ">
-  //     <Button
-  //       outline
-  //       small
-  //       label="Register with Google"
-  //       icon={FcGoogle}
-  //       onClick={() => {}}
-  //     />
-  //   </div>
-  // )
-
   return (
     <Modal
       disabled={isLoading}
@@ -135,7 +120,6 @@ const RegisterModal = () => {
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
-      // footer={footerContent}
     />
   )
 }
