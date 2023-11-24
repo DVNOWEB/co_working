@@ -14,10 +14,10 @@ const Hero = () => {
       />
 
       <div className="absolute top-60 inset-0 flex justify-center">
-        <div className="text-center text-white relative responsive">
-          <h1 className="text-white font-extrabold relative mix-overlay hero-text">
+        <div className="text-center relative responsive">
+          <h1 className="text-white mix-blend-overlay font-extrabold relative hero-text">
             CO-WORKING
-            <span className="text-center absolute font-semibold tracking-wider mix-blend-difference hero-span bottom-3 sm:bottom-5 md:bottom-6 right-0">
+            <span className=" text-black text-center absolute font-semibold tracking-wider hero-span bottom-3 sm:bottom-5 md:bottom-6 right-0">
               BANGKOK
             </span>
           </h1>
